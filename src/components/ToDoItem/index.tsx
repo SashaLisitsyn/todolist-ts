@@ -8,39 +8,39 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    todo: {
+    toDo: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-    todo__input: {
+    toDo__input: {
       type: 'checkbox',
     },
   })
 );
 
 type ToDoItemProps = {
-  todo: any;
-  removeTodo(id: number): void;
+  toDo: any;
+  removeToDo(id: number): void;
 };
 
 export const ToDoItem: React.FC<ToDoItemProps> = (props) => {
-  const { todo, removeTodo } = props;
+  const { toDo, removeToDo } = props;
 
   const classes = useStyles();
 
-  const handleRemoveTodo = () => {
-    removeTodo(todo.id);
+  const handleRemoveToDo = () => {
+    removeToDo(toDo.id);
   };
 
   return (
     <Accordion>
-      <AccordionDetails className={classes.todo}>
-        <Typography className={classes.todo__input}>{todo.value}</Typography>
+      <AccordionDetails className={classes.toDo}>
+        <Typography className={classes.toDo__input}>{toDo.value}</Typography>
         <Button
           variant="contained"
           color="secondary"
-          onClick={handleRemoveTodo}
+          onClick={handleRemoveToDo}
         >
           Удалить
         </Button>

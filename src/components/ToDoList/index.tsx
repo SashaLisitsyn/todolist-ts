@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 import { ToDoItem } from '../ToDoItem';
 
-import { ITodo } from '../../interfaces/toDoInterfaces';
+import { IToDo } from '../../interfaces/toDoInterfaces';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -16,19 +16,19 @@ const useStyles = makeStyles(() =>
 );
 
 type ToDoListProps = {
-  todos: ITodo[];
-  removeTodo(id: number): void;
+  toDos: IToDo[];
+  removeToDo(id: number): void;
 };
 
 export const ToDoList: React.FC<ToDoListProps> = (props) => {
-  const { todos, removeTodo } = props;
+  const { toDos, removeToDo } = props;
 
   const classes = useStyles();
 
   return (
     <div className={classes.toDoList}>
-      {todos.map((todo) => {
-        return <ToDoItem key={todo.id} todo={todo} removeTodo={removeTodo} />;
+      {toDos.map((toDo) => {
+        return <ToDoItem key={toDo.id} toDo={toDo} removeToDo={removeToDo} />;
       })}
     </div>
   );

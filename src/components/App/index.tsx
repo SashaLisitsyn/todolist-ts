@@ -4,29 +4,29 @@ import { Header } from '../Header';
 import { ToDoForm } from '../ToDoForm';
 import { ToDoList } from '../ToDoList';
 
-import { ITodo } from '../../interfaces/toDoInterfaces';
+import { IToDo } from '../../interfaces/toDoInterfaces';
 
 export const App: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  const [toDos, setToDos] = useState<IToDo[]>([]);
 
   const handleSubmitForm = (value: string) => {
-    const newTodo: ITodo = {
+    const newToDo: IToDo = {
       value: value,
       id: Date.now(),
       completed: false,
     };
-    setTodos((prev) => [newTodo, ...prev]);
+    setToDos((prev) => [newToDo, ...prev]);
   };
 
-  const removeTodo = (id: number) => {
-    setTodos([...todos.filter((todo) => todo.id !== id)]);
+  const removeToDo = (id: number) => {
+    setToDos([...toDos.filter((toDo) => toDo.id !== id)]);
   };
 
   return (
     <>
       <Header />
       <ToDoForm submitForm={handleSubmitForm} />
-      <ToDoList todos={todos} removeTodo={removeTodo} />
+      <ToDoList toDos={toDos} removeToDo={removeToDo} />
     </>
   );
 };
