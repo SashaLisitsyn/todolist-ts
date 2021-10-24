@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+
+import { removeToDo } from '../../actions/toDoActions';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,16 +25,15 @@ const useStyles = makeStyles(() =>
 
 type ToDoItemProps = {
   toDo: any;
-  removeToDo(id: number): void;
 };
 
-export const ToDoItem: React.FC<ToDoItemProps> = (props) => {
-  const { toDo, removeToDo } = props;
-
+export const ToDoItem: React.FC<ToDoItemProps> = ({ toDo }) => {
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
   const handleRemoveToDo = () => {
-    removeToDo(toDo.id);
+    dispatch(removeToDo(toDo.id));
   };
 
   return (

@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+
+import { IToDo } from '../../interfaces/toDoInterfaces';
+
+import { createToDo } from '../../actions/toDoActions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,20 +21,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ToDoFormProps {
-  submitForm(value: string): void;
-}
-
-export const ToDoForm: React.FC<ToDoFormProps> = (props) => {
-  const { submitForm } = props;
-
+export const ToDoForm: React.FC = () => {
   const classes = useStyles();
 
   const [value, setValue] = useState<string>('');
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event: React.SyntheticEvent, value: string) => {
     event.preventDefault();
-    submitForm(value);
+    const newToDo: IToDo = {
+      value: value,
+      id: Date.now(),
+      completed: false,
+    };
+    dispatch(createToDo(newToDo));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +44,7 @@ export const ToDoForm: React.FC<ToDoFormProps> = (props) => {
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      handleSubmit(event);
+      handleSubmit(event, value);
       setValue('');
     }
   };
